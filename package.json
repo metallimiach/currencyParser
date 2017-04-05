@@ -1,0 +1,22 @@
+{
+  "name": "bankcurrate",
+  "version": "1.0.0",
+  "description": "Minsk's banks currency rates parser",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/metallimiach/currencyParser.git"
+  },
+  "author": "metallimiach",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "cheerio": "^0.22.0",
+    "express": "^4.15.2",
+    "mongojs": "^2.4.0",
+    "request": "^2.81.0"
+  }
+}
