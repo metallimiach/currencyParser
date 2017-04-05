@@ -1,9 +1,9 @@
 // rates.js
+// =============================================================================
 
 // call the packages we need
 var express = require('express');
 var router = express.Router();
-
 var request = require('request');
 var cheerio = require('cheerio');
 var iconv = require('iconv-lite');
@@ -18,21 +18,20 @@ router.get('/', function (req, res, next) {
     request({
         uri: url,
         method: 'GET',
-        encoding: null //encoding in binery
+        encoding: null                                      //encoding in binery
     }, function (error, response, body) {
-        html = iconv.decode(new Buffer(body), 'win1251'); //encoding in win1251
+        html = iconv.decode(new Buffer(body), 'win1251');   //encoding in win1251
         if (!error && response.statusCode == 200) {
-            rates = parseContent(html);            
+            rates = parseContent(html);
         };
         res.json(rates);
         rates = [];
     });
 });
 
-
 function parseContent(html) {
     var $ = cheerio.load(html);
-    //find all 'tr' tags
+    // find all 'tr' tags and extract data row by row
     $('tbody').children('tr').each(function (i, el) {
         var bank = $(this).children('td.bank').find('b').text();
         var bankAddress = $(this).children('td.bank').find('small').text();
@@ -44,7 +43,7 @@ function parseContent(html) {
         var rubBuy = $(this).children().last().prev().text();
         var rubSell = $(this).children().last().text();
 
-        //Parsed meta data object
+        // parsed meta data object
         var metadata = {
             bank: bank,
             Address: bankAddress,
@@ -60,6 +59,5 @@ function parseContent(html) {
     });
     return rates;
 }
-
 
 module.exports = router;
