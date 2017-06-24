@@ -15,6 +15,8 @@ app.use(bodyParser.json());
 
 // add files for our API
 var rates = require('./routes/rates');
+var banks = require('./routes/banks');
+var reserve = require('./routes/reserve');
 
 var port = process.env.PORT || 8080;        // set our port
 
@@ -40,6 +42,8 @@ router.get('/', function (req, res) {
 // all of our routes will be prefixed with /api
 app.use('/api', router);
 app.use('/api/rates', rates);
+app.use('/api/banks', banks);
+app.use('/api/reserve', reserve);
 
 // START THE SERVER
 // =============================================================================
